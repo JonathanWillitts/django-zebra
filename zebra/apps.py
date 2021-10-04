@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class ZebraConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'zebra'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "zebra"
