@@ -2,9 +2,9 @@
 <html>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <head>
-<link rel="stylesheet" href="{% static 'zebra/css/sample.css' %}">
-<script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-3.0.216.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-Sample.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'zebra/css/sample.css' %}">
+    <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-3.0.216.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-Sample.js' %}"></script>
 </head>
 <body>
 
@@ -17,7 +17,7 @@
         <input type="button" value="Get Application Configuration" onclick="getConfig()"><br/><br/>
         <input type="button" value="Send Config Label" onclick="writeToSelectedPrinter('~wc')"><br/><br/>
         <input type="button" value="Send ZPL Label" onclick="writeToSelectedPrinter('^XA^FO200,200^A0N36,36^FDTest Label^FS^XZ')"><br/><br/>
-        <input type="text" name="write_text" id="write_text"><input type="button" value="Write" onclick="writeToSelectedPrinter(document.getElementById('write_text').value)"><br/><br/>
+        <input type="text" name="write_text" id="write_text" value="~wc"><input type="button" value="Write" onclick="writeToSelectedPrinter(document.getElementById('write_text').value)"><br/><br/>
         <input type="button" value="Send File" onclick="sendFile('{% static "zebra/wc.zpl" %}');"><br/><br/>
     </div>
     <div class="right-col">
