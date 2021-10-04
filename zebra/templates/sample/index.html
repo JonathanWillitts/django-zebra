@@ -2,6 +2,7 @@
 <html>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <head>
+<link rel="stylesheet" href="{% static 'zebra/css/sample.css' %}">
 <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-3.0.216.min.js' %}"></script>
 <script type="text/javascript">
 var selected_device;
@@ -97,23 +98,6 @@ function onDeviceSelected(selected)
 }
 window.onload = setup;
 </script>
-<style>
-    .row {
-        display: flex;
-    }
-
-    .left-col, .right-col {
-        flex: 50%;
-        margin: 2em;
-        padding: 1em;
-    }
-    .left-col {
-        background: lightgreen;
-    }
-    .right-col {
-        background: moccasin;
-    }
-</style>
 </head>
 <body>
 
