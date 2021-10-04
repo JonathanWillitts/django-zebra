@@ -1,7 +1,8 @@
+{% load static %}
 <html>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <head>
-<script type="text/javascript" src="../BrowserPrint-3.0.216.min.js"></script>
+<script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-3.0.216.min.js' %}"></script>
 <script type="text/javascript">
 var selected_device;
 var devices = [];
@@ -79,14 +80,10 @@ function getDeviceCallback(deviceList)
 
 function sendImage(imageUrl)
 {
-	url = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
-	url = url + "/" + imageUrl;
-	selected_device.convertAndSendFile(url, undefined, errorCallback)
+	selected_device.convertAndSendFile(imageUrl, undefined, errorCallback)
 }
 function sendFile(fileUrl){
-    url = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
-    url = url + "/" + fileUrl;
-    selected_device.sendFile(url, undefined, errorCallback)
+    selected_device.sendFile(fileUrl, undefined, errorCallback)
 }
 function onDeviceSelected(selected)
 {
@@ -100,21 +97,47 @@ function onDeviceSelected(selected)
 }
 window.onload = setup;
 </script>
+<style>
+    .row {
+        display: flex;
+    }
+
+    .left-col, .right-col {
+        flex: 50%;
+        margin: 2em;
+        padding: 1em;
+    }
+    .left-col {
+        background: lightgreen;
+    }
+    .right-col {
+        background: moccasin;
+    }
+</style>
 </head>
 <body>
 
 <span style="padding-right:50px; font-size:200%">Zebra Browser Print Test Page</span><br/>
 <span style="font-size:75%">This page must be loaded from a web server to function properly.</span><br><br>
-Selected Device: <select id="selected_device" onchange=onDeviceSelected(this);></select> <!--  <input type="button" value="Change" onclick="changeDevice();">--> <br/><br/> 
-<input type="button" value="Get Application Configuration" onclick="getConfig()"><br/><br/>
-<input type="button" value="Send Config Label" onclick="writeToSelectedPrinter('~wc')"><br/><br/>
-<input type="button" value="Send ZPL Label" onclick="writeToSelectedPrinter('^XA^FO200,200^A0N36,36^FDTest Label^FS^XZ')"><br/><br/>
-<input type="button" value="Get Status" onclick="writeToSelectedPrinter('~hs'); readFromSelectedPrinter()"><br/><br/>
-<input type="button" value="Get Local Devices" onclick="BrowserPrint.getLocalDevices(getDeviceCallback, errorCallback);"><br/><br/>
-<input type="text" name="write_text" id="write_text"><input type="button" value="Write" onclick="writeToSelectedPrinter(document.getElementById('write_text').value)"><br/><br/>
-<input type="button" value="Read" onclick="readFromSelectedPrinter()"><br/><br/>
-<input type="button" value="Send BMP" onclick="sendImage('Zebra_logobox.bmp');"><br/><br/>
-<input type="button" value="Send JPG" onclick="sendImage('ZebraGray.jpg');"><br/><br/>
-<input type="button" value="Send File" onclick="sendFile('wc.zpl');"><br/><br/>
+<div class="row">
+    <div class="left-col">
+        <h2>Tested/working with ZPL (virtual) printer</h2>
+        Selected Device: <select id="selected_device" onchange=onDeviceSelected(this);></select> <!--  <input type="button" value="Change" onclick="changeDevice();">--> <br/><br/>
+        <input type="button" value="Get Application Configuration" onclick="getConfig()"><br/><br/>
+        <input type="button" value="Send Config Label" onclick="writeToSelectedPrinter('~wc')"><br/><br/>
+        <input type="button" value="Send ZPL Label" onclick="writeToSelectedPrinter('^XA^FO200,200^A0N36,36^FDTest Label^FS^XZ')"><br/><br/>
+        <input type="text" name="write_text" id="write_text"><input type="button" value="Write" onclick="writeToSelectedPrinter(document.getElementById('write_text').value)"><br/><br/>
+        <input type="button" value="Send File" onclick="sendFile('{% static "zebra/wc.zpl" %}');"><br/><br/>
+    </div>
+    <div class="right-col">
+        <h2>Not working with ZPL (virtual) printer</h2>
+        (may work with physical Zebra printer)<br/><br/>
+        <input type="button" value="Get Status" onclick="writeToSelectedPrinter('~hs'); readFromSelectedPrinter()"><br/><br/>
+        <input type="button" value="Get Local Devices" onclick="BrowserPrint.getLocalDevices(getDeviceCallback, errorCallback);"><br/><br/>
+        <input type="button" value="Read" onclick="readFromSelectedPrinter()"><br/><br/>
+        <input type="button" value="Send BMP" onclick="sendImage('{% static "zebra/Zebra_logobox.bmp" %}');"><br/><br/>
+        <input type="button" value="Send JPG" onclick="sendImage('{% static "zebra/ZebraGray.jpg" %}');"><br/><br/>
+    </div>
+</div>
 </body>
 </html>
