@@ -1,0 +1,15 @@
+.row {
+    display: flex;
+}
+
+.left-col, .right-col {
+    flex: 50%;
+    margin: 2em;
+    padding: 1em;
+}
+.left-col {
+    background: lightgreen;
+}
+.right-col {
+    background: moccasin;
+}
