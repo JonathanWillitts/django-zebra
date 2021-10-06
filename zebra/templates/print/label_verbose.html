@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Printing {{ label_type }} sample...</title>
+    <link rel="stylesheet" href="{% static 'zebra/css/sample.css' %}">
+    <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-3.0.216.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-Edc.js' %}"></script>
+</head>
+<body>
+    <h1>Printing {{ label_type }} sample...</h1>
+    <p>Label data:</p>
+    <code class="label-data">{{ label_data }}</code>
+
+    <p>
+        Default device:
+        <span id="default-device-display" class="default-device-not-found">No default device found</span>
+    </p>
+    <input type="button" value="Reprint {{ label_type }} label" onclick="writeToSelectedPrinter('{{ label_data }}')"><br/><br/>
+    <input type="button" value="Print Zebra config" onclick="writeToSelectedPrinter('{{ config_label_data }}')"><br/><br/>
+
+    <script type="text/javascript">
+        writeToSelectedPrinter('{{ label_data }}')
+    </script>
+</body>
+</html>
