@@ -13,3 +13,17 @@
 .right-col {
     background: moccasin;
 }
+
+#default-device-display {
+    padding: 0.25em;
+}
+
+.default-device-not-found {
+    background: lightpink;
+    color: red;
+}
+
+.default-device-found {
+    background: palegreen;
+    color: green;
+}

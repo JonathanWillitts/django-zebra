@@ -6,14 +6,17 @@
     <title>Zebra EDC Test</title>
     <link rel="stylesheet" href="{% static 'zebra/css/sample.css' %}">
     <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-3.0.216.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-Sample.js' %}"></script>
+    <script type="text/javascript" src="{% static 'zebra/js/BrowserPrint-Edc.js' %}"></script>
 </head>
 <body>
     <h1>EDC Zebra Test</h1>
     <div class="row">
         <div class="left-col">
             <h2>EDC test labels</h2>
-            Selected Device: <select id="selected_device" onchange=onDeviceSelected(this);></select> <!--  <input type="button" value="Change" onclick="changeDevice();">--> <br/><br/>
+            <p>
+                Default device:
+                <span id="default-device-display" class="default-device-not-found">No default device found</span>
+            </p>
             <input type="button" value="Print requisition label" onclick="writeToSelectedPrinter('{{ requisition_label_data }}')"><br/><br/>
             <input type="button" value="Print aliquot label" onclick="writeToSelectedPrinter('{{ aliquot_label_data }}')"><br/><br/>
         </div>
