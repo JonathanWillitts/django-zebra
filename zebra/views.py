@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 from . import labels
@@ -6,20 +7,36 @@ from . import labels
 
 
 def index(request):
-    return render(request, "index.html")
+    return render(request, "index.html", {"sample_names": labels.zpl_samples.keys()})
+
+
+def print_concise(request, label_type):
+    try:
+        context = {"label_data": labels.zpl_samples[label_type]}
+    except KeyError:
+        raise Http404(f"No sample label data for '{label_type}' exists")
+    return render(request, "print/label_concise.html", context)
+
+
+def print_verbose(request, label_type):
+    try:
+        context = {
+            "label_data": labels.zpl_samples[label_type],
+            "config_label_data": labels.zpl_samples["config"],
+            "label_type": label_type,
+        }
+    except KeyError:
+        raise Http404(f"No sample label data for '{label_type}' exists")
+    return render(request, "print/label_verbose.html", context)
 
 
 def edc(request):
-
-    context = {
-        # EDC test labels
-        "requisition_label_data": labels.get_requisition_sample(),
-        "aliquot_label_data": labels.get_aliquot_sample(),
-        # For troubleshooting
-        "config_label_data": "~wc",
-        "sample_barcode_label_data": "^XA^FO50,50^B8N,100,Y,N^FD1234567^FS^XZ",
-    }
-    return render(request, "edc/index.html", context)
+    return render(
+        request,
+        "edc/index.html",
+        # Append '_label_data' onto each key to match target template
+        dict((f"{k}_label_data", v) for k, v in labels.zpl_samples.items()),
+    )
 
 
 def sample(request):

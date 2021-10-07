@@ -6,6 +6,18 @@
 </head>
 <body>
     <h1>Django-Zebra Home</h1>
+    <h2>Direct-print sample label links:</h2>
+    <ul>
+        {% for sample_name in sample_names %}
+            <li>
+                {{ sample_name|capfirst }} label
+                 (<a href="{% url 'print_concise' sample_name %}">print</a>
+                | <a href="{% url 'print_verbose' sample_name %}">verbose view</a>)
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Other:</h2>
     <ul>
         <li><a href="{% url 'edc' %}">Zebra EDC</a></li>
         <li><a href="{% url 'sample' %}">Zebra Sample</a></li>

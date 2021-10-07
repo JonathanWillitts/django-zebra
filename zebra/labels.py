@@ -17,7 +17,7 @@ def _get_base_label_data():
     )
 
 
-def get_requisition_sample():
+def _get_requisition_sample():
     return (
         "^XA^PR4"
         "^FO315,15^A0N,20,15^FD{protocol} Site {site} {clinician_initials} {alpha_code} {item}/{item_count}^FS"
@@ -36,7 +36,7 @@ def get_requisition_sample():
     )
 
 
-def get_aliquot_sample():
+def _get_aliquot_sample():
     return (
         "^XA^PR4"
         "^FO315,15^A0N,20,15^FD{protocol} Site {site} {clinician_initials} {alpha_code} {aliquot_count}/{children_count} {primary}^FS"
@@ -54,3 +54,13 @@ def get_aliquot_sample():
         primary="xXx",
         **_get_base_label_data()
     )
+
+
+zpl_samples = {
+    # EDC label samples
+    "aliquot": _get_aliquot_sample,
+    "requisition": _get_requisition_sample,
+    # Known working/use for troubleshooting
+    "config": "~wc",
+    "generic_barcode": "^XA^FO50,50^B8N,100,Y,N^FD1234567^FS^XZ",
+}
