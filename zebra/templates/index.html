@@ -6,6 +6,14 @@
 </head>
 <body>
     <h1>Django-Zebra Home</h1>
+    <h2>Randomization print demo:</h2>
+    <ul>
+        <li><a href="{% url 'admin:index' %}">Admin site</a></li>
+        <li><a href="{% url 'admin:randomization_slot_changelist' %}">Slots admin site</a></li>
+        <li><a href="{% url 'create_slots' 1 %}">{% url 'create_slots' 1 %}</a></li>
+        <li><a href="{% url 'create_slots' 5 %}">{% url 'create_slots' 5 %}</a></li>
+        <li><a href="{% url 'create_slots' 50 %}">{% url 'create_slots' 50 %}</a></li>
+    </ul>
     <h2>Direct-print sample label links:</h2>
     <ul>
         {% for sample_name in sample_names %}

@@ -19,6 +19,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path("", RedirectView.as_view(url="zebra/")),
+    path("rando/", include("randomization.urls")),
     path("zebra/", include("zebra.urls")),
     path("admin/", admin.site.urls),
 ]

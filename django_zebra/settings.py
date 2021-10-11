@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "randomization.apps.RandomizationConfig",
     "zebra.apps.ZebraConfig",
     "django.contrib.admin",
     "django.contrib.auth",

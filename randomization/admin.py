@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Slot
+
+
+class SlotAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Slot._meta.fields if field.name != "id"]
+
+
+admin.site.register(Slot, SlotAdmin)
